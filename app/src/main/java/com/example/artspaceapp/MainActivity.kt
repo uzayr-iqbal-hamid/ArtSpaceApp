@@ -40,6 +40,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.focusModifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
@@ -138,7 +139,7 @@ fun ArtNavigation(
             modifier = Modifier.align(Alignment.CenterVertically)
         )
 
-        Button(onClick = onNext, enabled = pageNo < 6) {
+        Button(onClick = onNext, enabled = pageNo < 6, modifier = Modifier.testTag("NextButton")) {
             Text("Next ->")
         }
     }
@@ -164,8 +165,10 @@ fun ArtWall(
             ) {
                 Image(
                     painter = painterResource(imageId),
-                    contentDescription = null,
-                    modifier = Modifier.size(350.dp),
+                    contentDescription = "ArtworkImage",
+                    modifier = Modifier
+                        .size(350.dp)
+                        .testTag("ArtworkImage"),
                     contentScale = ContentScale.Fit
                 )
             }
@@ -187,6 +190,7 @@ fun ArtDetails(
         Column( modifier = Modifier.padding(16.dp) ) {
             Text (
                 text = stringResource(titleRes),
+                modifier = Modifier.testTag("ArtworkTitle"),
                 style = MaterialTheme.typography.titleMedium
             )
             Text(
